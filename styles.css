@@ -168,7 +168,7 @@ button { font: inherit; cursor: pointer; }
 
 /* Skills */
 .skills__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
-.skills-constellation { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: center; margin-bottom: 2rem; justify-items: center; }
+.skills-constellation { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-bottom: 2rem; }
 .skills-constellation__circle { display: flex; align-items: center; justify-content: center; padding: 1rem; border-radius: 8px; background: rgba(10,10,12,0.0); backdrop-filter: blur(0px); border: 1px solid transparent; transition: background .2s, backdrop-filter .2s, border-color .2s; }
 .skills-constellation__circle:hover { background: rgba(10,10,12,0.4); backdrop-filter: blur(4px); border-color: var(--border); }
 @media (max-width: 768px) { .skills-constellation { grid-template-columns: 1fr; } }
