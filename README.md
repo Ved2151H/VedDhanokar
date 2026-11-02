@@ -1,6 +1,6 @@
 # Ved Dhanokar
 
-![Ved Dhanokar](./assets/portrait.jpg)
+<img src="./assets/portrait.jpg" width="120" alt="Ved Dhanokar" style="border-radius:50%" />
 
 **Full-Stack Developer | AI/ML Developer**
 
@@ -17,6 +17,12 @@ RAG-based assistants, and database-driven full-stack products.
 
 From real-time accident detection to multi-tenant enterprise platforms,
 I ship end to end.
+
+## Stats
+
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=Ved2151H&show_icons=true&theme=dark&hide_border=true)
+![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Ved2151H&layout=compact&theme=dark&hide_border=true)
+![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=Ved2151H&theme=dark&hide_border=true)
 
 ## What I work with
 
