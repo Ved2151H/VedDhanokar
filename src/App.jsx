@@ -273,7 +273,7 @@ export default function App() {
                 <p className="about__lead reveal">Full-stack developer and AI/ML enthusiast pursuing a B.Tech in Information Technology at IICT, MGM University.</p>
                 <p className="about__body reveal">I build AI/ML systems, computer vision applications, RAG-based assistants and database-driven full-stack products. From real-time accident detection to multi-tenant enterprise platforms, I ship end to end.</p>
                 <div className="stats-row reveal">
-                  <div className="stat"><span className="stat__num">5</span><span className="stat__plus">+</span><div className="stat__label">Projects</div></div>
+                  <div className="stat"><span className="stat__num" style={{ whiteSpace: 'nowrap' }}>10+</span><div className="stat__label">Projects</div></div>
                   <div className="stat"><span className="stat__num">3</span><div className="stat__label">Hackathon Finalists</div></div>
                   <div className="stat"><span className="stat__num">8.45</span><div className="stat__label">CGPA</div></div>
                 </div>

@@ -158,7 +158,7 @@ button { font: inherit; cursor: pointer; }
 .about__body { color: var(--fg-muted); max-width: 50ch; }
 .stats-row { display: flex; gap: 2.5rem; margin-top: 2rem; flex-wrap: wrap; }
 .stat { display: flex; flex-direction: column; }
-.stat__num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.stat__num { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; white-space: nowrap; }
 .stat__plus { font-family: var(--font-display); font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; }
 .stat__label { font-size: .75rem; color: var(--fg-muted); margin-top: .3rem; }
 .ability-card { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; perspective: 1000px; }
