@@ -38,7 +38,7 @@ export default function SkillsConstellation() {
         })}
         {/* center node */}
         <circle cx={cx} cy={cy} r="28" fill="rgba(217,164,65,0.15)" stroke="#d9a441" strokeWidth="1.5" />
-        <text x={cx} y={cy + 4} textAnchor="middle" fill="#f4f3f0" fontSize="11" fontFamily="Syne, sans-serif" fontWeight="700">VED</text>
+        <text x={cx} y={cy + 4} textAnchor="middle" fill="#f4f3f0" fontSize="13" fontFamily="Syne, sans-serif" fontWeight="700">VED</text>
         {/* group nodes */}
         {GROUPS.map(g => {
           const rad = (g.angle * Math.PI) / 180;
@@ -54,7 +54,7 @@ export default function SkillsConstellation() {
                 strokeWidth="1.5"
                 animate={{ r: isActive ? 22 : 18 }}
               />
-              <text x={x} y={y + 4} textAnchor="middle" fill={isActive ? '#0a0a0b' : '#f4f3f0'} fontSize="8" fontFamily="Manrope, sans-serif" fontWeight="600">
+              <text x={x} y={y + 4} textAnchor="middle" fill={isActive ? '#0a0a0b' : '#f4f3f0'} fontSize="10" fontFamily="Manrope, sans-serif" fontWeight="600">
                 {g.label.split(' ')[0]}
               </text>
             </g>

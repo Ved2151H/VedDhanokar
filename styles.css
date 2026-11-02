@@ -168,13 +168,14 @@ button { font: inherit; cursor: pointer; }
 
 /* Skills */
 .skills__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
-.skills-constellation { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; margin-bottom: 2rem; }
+.skills-constellation { display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: center; margin-bottom: 2rem; justify-items: center; }
 .skills-constellation__circle { display: flex; align-items: center; justify-content: center; padding: 1rem; border-radius: 8px; background: rgba(10,10,12,0.0); backdrop-filter: blur(0px); border: 1px solid transparent; transition: background .2s, backdrop-filter .2s, border-color .2s; }
 .skills-constellation__circle:hover { background: rgba(10,10,12,0.4); backdrop-filter: blur(4px); border-color: var(--border); }
 @media (max-width: 768px) { .skills-constellation { grid-template-columns: 1fr; } }
 .skills-constellation__svg { width: 100%; max-width: 360px; margin: 0 auto; }
 .skills-constellation__panel { min-height: 120px; padding: 1rem; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg-elev); }
-.skills-constellation__panel-title { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: .6rem; color: var(--accent); }
+.skills-constellation__panel-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; margin-bottom: .6rem; color: var(--accent); }
+.skills-constellation__panel { text-align: center; }
 .skills-constellation__panel-skills { display: flex; flex-wrap: wrap; gap: .4rem; }
 .skills-constellation__hint { color: var(--fg-muted); font-size: .85rem; }
 .skills__grid .skill-card:nth-child(1) { transition-delay: .05s; }
