@@ -292,9 +292,8 @@ export default function App() {
         <section id="skills" className="section">
           <div className="container">
             <h2 className="section__title reveal">Capabilities</h2>
-            <div className="skills__panel">
-              <SkillsConstellation />
-              <div className="skills__grid">
+            <SkillsConstellation />
+            <div className="skills__grid">
               {SKILLS.map(g => (
                 <article className="skill-card reveal" key={g.title}>
                   <h3>{g.title}</h3>
@@ -302,7 +301,6 @@ export default function App() {
                   <div className="skill-card__tags">{g.tags.map(t => <span className="skill-card__tag" key={t}>{t}</span>)}</div>
                 </article>
               ))}
-            </div>
             </div>
           </div>
         </section>

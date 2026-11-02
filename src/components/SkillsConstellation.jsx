@@ -19,7 +19,8 @@ export default function SkillsConstellation() {
 
   return (
     <div className="skills-constellation">
-      <svg viewBox="0 0 400 400" className="skills-constellation__svg">
+      <div className="skills-constellation__circle">
+        <svg viewBox="0 0 400 400" className="skills-constellation__svg">
         {/* connecting lines to center */}
         {GROUPS.map(g => {
           const rad = (g.angle * Math.PI) / 180;
@@ -60,6 +61,7 @@ export default function SkillsConstellation() {
           );
         })}
       </svg>
+      </div>
       <div className="skills-constellation__panel">
         {activeGroup ? (
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} key={activeGroup.id}>
