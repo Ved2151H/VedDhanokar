@@ -1,7 +1,5 @@
 # Ved Dhanokar
 
-<img src="./assets/portrait.jpg" width="120" alt="Ved Dhanokar" style="border-radius:50%" />
-
 **Full-Stack Developer | AI/ML Developer**
 
 B.Tech Information Technology | IICT, MGM University | CGPA 8.45 | India
