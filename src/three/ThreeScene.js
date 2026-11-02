@@ -177,9 +177,9 @@ export class ThreeScene {
     // camera target
     const s = this.scroll;
     this.targetCam.set(
-      this.mouse.x * (this.reduced ? 0 : 0.6) + Math.sin(s * Math.PI) * 0.5,
-      -this.mouse.y * (this.reduced ? 0 : 0.4) + (s - 0.5) * 0.6,
-      6 - s * 9
+      this.mouse.x * (this.reduced ? 0 : 1.2) + Math.sin(s * Math.PI) * 0.8,
+      -this.mouse.y * (this.reduced ? 0 : 0.8) + (s - 0.5) * 1.0,
+      6 - s * 10
     );
     this.camPos.lerp(this.targetCam, this.reduced ? 0.2 : 0.06);
     this.camera.position.copy(this.camPos);
