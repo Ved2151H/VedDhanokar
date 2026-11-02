@@ -18,12 +18,6 @@ RAG-based assistants, and database-driven full-stack products.
 From real-time accident detection to multi-tenant enterprise platforms,
 I ship end to end.
 
-## Stats
-
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=Ved2151H&show_icons=true&theme=dark&hide_border=true)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=Ved2151H&layout=compact&theme=dark&hide_border=true)
-![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=Ved2151H&theme=dark&hide_border=true)
-
 ## What I work with
 
 **Programming** - Java, Python, JavaScript, SQL
@@ -47,7 +41,8 @@ Next.js, TypeScript, Prisma, PostgreSQL / Neon, REST APIs
 
 ### Accident Detection System
 Real-time accident detection using YOLOv8 and ByteTrack, with geolocation,
-prediction models and live monitoring.
+prediction models and live monitoring. Improved detection accuracy from 81%
+to 88%.
 YOLOv8, ByteTrack, Python, OpenCV
 
 ### Zero UI Emergency Detection System
