@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { motion } from 'motion/react';
 import SceneCanvas from './components/SceneCanvas.jsx';
 import ProjectLab from './components/ProjectLab.jsx';
+import SkillsConstellation from './components/SkillsConstellation.jsx';
+import Terminal from './components/Terminal.jsx';
 
 const SKILLS = [
   { title: 'Programming', desc: 'Java, Python, JavaScript, SQL', tags: ['Java','Python','JavaScript','SQL'] },
@@ -29,6 +32,7 @@ export default function App() {
   const [introHidden, setIntroHidden] = useState(() => sessionStorage.getItem('introSeen') === '1');
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [navHidden, setNavHidden] = useState(false);
   const [repos, setRepos] = useState([]);
   const [ghQuery, setGhQuery] = useState('');
   const [ghLoading, setGhLoading] = useState(true);
@@ -41,6 +45,7 @@ export default function App() {
   const [timeStr, setTimeStr] = useState('');
   const [backVisible, setBackVisible] = useState(false);
   const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lastY = useRef(0);
 
   const rootRef = useReveal();
 
@@ -57,11 +62,18 @@ export default function App() {
     const cursor = document.getElementById('cursor');
     const dot = document.getElementById('cursor-dot');
     let mx=0,my=0,cx=0,cy=0, raf;
-    const onMove = (e) => { mx=e.clientX; my=e.clientY; dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`; };
+    const label = document.getElementById('cursor-label');
+    const onMove = (e) => { mx=e.clientX; my=e.clientY; dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`; if (label) label.style.transform = `translate(${mx+16}px,${my+16}px)`; };
+    const onOver = (e) => {
+      const t = e.target.closest('[data-cursor]');
+      if (t && label) { label.textContent = t.getAttribute('data-cursor'); label.classList.add('is-visible'); cursor.classList.add('is-hover'); }
+      else if (label) { label.classList.remove('is-visible'); cursor.classList.remove('is-hover'); }
+    };
+    document.addEventListener('mouseover', onOver);
     const loop = () => { cx += (mx-cx)*0.15; cy += (my-cy)*0.15; cursor.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`; raf=requestAnimationFrame(loop); };
     document.addEventListener('mousemove', onMove);
     raf = requestAnimationFrame(loop);
-    return () => { document.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf); };
+    return () => { document.removeEventListener('mousemove', onMove); document.removeEventListener('mouseover', onOver); cancelAnimationFrame(raf); };
   }, [reduceMotion]);
 
   // Scroll
@@ -69,6 +81,11 @@ export default function App() {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
       setBackVisible(window.scrollY > 600);
+      // navbar hide/show on scroll direction
+      const y = window.scrollY;
+      if (y > lastY.current && y > 120) setNavHidden(true);
+      else setNavHidden(false);
+      lastY.current = y;
       const photo = document.querySelector('.hero__photo');
       if (photo) { photo.style.transform = `translateY(${window.scrollY * 0.12}px)`; }
       const tl = document.getElementById('timeline');
@@ -187,24 +204,25 @@ export default function App() {
       {/* Cursor */}
       <div id="cursor" className="cursor" aria-hidden="true"></div>
       <div id="cursor-dot" className="cursor-dot" aria-hidden="true"></div>
+      <div id="cursor-label" className="cursor-label" aria-hidden="true"></div>
 
       {/* Nav */}
-      <header className={`nav ${scrolled ? 'is-scrolled' : ''}`} id="nav">
+      <motion.header className={`nav ${scrolled ? 'is-scrolled' : ''}`} id="nav" animate={{ y: navHidden ? -100 : 0 }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
         <div className="container nav__inner">
           <a href="#hero" className="nav__brand">VD</a>
           <nav aria-label="Primary">
             <ul className="nav__links">
-              <li><a href="#about">About</a></li>
-              <li><a href="#work">Work</a></li>
-              <li><a href="#experience">Experience</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="#about" data-cursor="View">About</a></li>
+              <li><a href="#work" data-cursor="View">Work</a></li>
+              <li><a href="#experience" data-cursor="View">Experience</a></li>
+              <li><a href="#contact" data-cursor="View">Contact</a></li>
             </ul>
           </nav>
           <button className="nav__menu" onClick={() => setMenuOpen(o=>!o)} aria-label="Open menu" aria-expanded={menuOpen}>
             <span></span><span></span>
           </button>
         </div>
-      </header>
+      </motion.header>
 
       <div className={`mobile-menu ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
         <nav aria-label="Mobile">
@@ -254,6 +272,11 @@ export default function App() {
                 <h2 className="section__title reveal">About</h2>
                 <p className="about__lead reveal">Full-stack developer and AI/ML enthusiast pursuing a B.Tech in Information Technology at IICT, MGM University.</p>
                 <p className="about__body reveal">I build AI/ML systems, computer vision applications, RAG-based assistants and database-driven full-stack products. From real-time accident detection to multi-tenant enterprise platforms, I ship end to end.</p>
+                <div className="stats-row reveal">
+                  <div className="stat"><span className="stat__num">5</span><span className="stat__plus">+</span><div className="stat__label">Projects</div></div>
+                  <div className="stat"><span className="stat__num">3</span><div className="stat__label">Hackathon Finalists</div></div>
+                  <div className="stat"><span className="stat__num">8.45</span><div className="stat__label">CGPA</div></div>
+                </div>
               </div>
               <div className="about__card ability-card reveal" onMouseMove={abilityTilt} onMouseLeave={abilityLeave}>
                 <div className="ability-card__inner"><h3>Development</h3><p>React, Node, TypeScript, Python</p></div>
@@ -269,7 +292,9 @@ export default function App() {
         <section id="skills" className="section">
           <div className="container">
             <h2 className="section__title reveal">Capabilities</h2>
-            <div className="skills__grid">
+            <div className="skills__panel">
+              <SkillsConstellation />
+              <div className="skills__grid">
               {SKILLS.map(g => (
                 <article className="skill-card reveal" key={g.title}>
                   <h3>{g.title}</h3>
@@ -277,6 +302,7 @@ export default function App() {
                   <div className="skill-card__tags">{g.tags.map(t => <span className="skill-card__tag" key={t}>{t}</span>)}</div>
                 </article>
               ))}
+            </div>
             </div>
           </div>
         </section>
@@ -420,6 +446,7 @@ export default function App() {
       </footer>
 
       <button className={`back-to-top ${backVisible ? 'is-visible' : ''}`} aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' })}>↑</button>
+      <Terminal />
     </>
   );
 }
