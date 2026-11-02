@@ -50,7 +50,7 @@ applications, RAG-based assistants, and database-driven full-stack products.
 
 - Finalist, Zentrix'26 National-Level Smart City AI Hackathon
 - Finalist, Zero UI Challenge, Cummins College of Engineering
-- 3rd Rank, IEEE C'Quest Programming Competition
+- 3rd Rank, IEEE C’Quest Programming Competition
 - Google Solution Challenge Participant
 
 ## Certifications

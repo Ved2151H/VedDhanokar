@@ -45,7 +45,7 @@ function ProjectRow({ p, index }) {
           <div className="project-row__tech">
             {p.tech.map(t => <span key={t} className="project-lab__tag">{t}</span>)}
           </div>
-          <a href={p.github} target="_blank" rel="noopener" className="project-row__link">View on GitHub →</a>
+          <a href={p.github} target="_blank" rel="noopener" className="project-row__link">View on GitHub</a>
         </div>
         <motion.div
           className="project-row__visual"

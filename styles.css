@@ -259,10 +259,10 @@ button { font: inherit; cursor: pointer; }
 .pv__alert { display: flex; align-items: center; gap: .5rem; padding: .5rem .7rem; background: rgba(255,90,90,0.12); border: 1px solid rgba(255,90,90,0.4); border-radius: 8px; color: #ff8a8a; font-weight: 600; font-size: .75rem; flex-wrap: wrap; }
 .pv__alert-sub { font-size: .6rem; color: var(--fg-muted); font-weight: 400; width: 100%; }
 .pv__confbar { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-.pv__confbar-fill { height: 100%; width: 92%; background: linear-gradient(90deg, #ff5a5a, var(--accent)); animation: conf 2s ease-in-out infinite alternate; }
-@keyframes conf { from { width: 88%; } to { width: 94%; } }
-.pv__scanline { position: absolute; left: 0; right: 0; height: 1px; background: var(--accent); opacity: .4; animation: scan 3s linear infinite; }
-@keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+.pv__confbar-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #ff5a5a, var(--accent)); transform-origin: left; animation: conf 2s ease-in-out infinite alternate; }
+@keyframes conf { from { transform: scaleX(0.88); } to { transform: scaleX(0.94); } }
+.pv__scanline { position: absolute; left: 0; right: 0; height: 1px; background: var(--accent); opacity: .4; top: 0; animation: scan 3s linear infinite; }
+@keyframes scan { 0% { transform: translateY(0); } 100% { transform: translateY(120px); } }
 .pv__camlabel { position: absolute; top: .5rem; left: .5rem; font-size: .6rem; color: var(--fg-muted); }
 .pv__alert { display: flex; align-items: center; gap: .5rem; padding: .5rem .7rem; background: rgba(255,90,90,0.12); border: 1px solid rgba(255,90,90,0.4); border-radius: 8px; color: #ff8a8a; font-weight: 600; font-size: .75rem; }
 .pv__alert-dot { width: 8px; height: 8px; border-radius: 50%; background: #ff5a5a; animation: pulse 1.2s ease-in-out infinite; }
@@ -322,8 +322,8 @@ button { font: inherit; cursor: pointer; }
 
 .project-lab__counter-total { font-family: var(--font-display); font-size: 1rem; color: var(--accent); }
 .project-lab__list { display: flex; flex-direction: column; gap: 8rem; }
-.project-row { position: relative; padding: 2rem 0; }
-.project-row__watermark { position: absolute; top: -1rem; left: -1rem; font-family: var(--font-display); font-size: clamp(8rem, 18vw, 16rem); font-weight: 800; color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; z-index: 0; }
+.project-row { position: relative; padding: 2rem 0; overflow: hidden; }
+.project-row__watermark { position: absolute; top: -1rem; left: -1rem; font-family: var(--font-display); font-size: clamp(8rem, 18vw, 16rem); font-weight: 800; color: rgba(255,255,255,0.02); line-height: 1; pointer-events: none; z-index: 0; }
 .project-row__content { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .project-row--reverse .project-row__content { direction: rtl; }
 .project-row--reverse .project-row__content > * { direction: ltr; }
@@ -339,7 +339,7 @@ button { font: inherit; cursor: pointer; }
 @media (max-width: 860px) { .project-row__visual { margin: 0 auto; } }
 .project-lab__slides { display: flex; flex-direction: column; gap: 6rem; }
 .project-slide { position: relative; min-height: 90vh; display: flex; align-items: center; padding: 4rem 0; overflow: hidden; }
-.project-slide__watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-display); font-size: clamp(12rem, 30vw, 28rem); font-weight: 800; color: rgba(255,255,255,0.025); line-height: 1; pointer-events: none; z-index: 0; white-space: nowrap; }
+.project-slide__watermark { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: var(--font-display); font-size: clamp(12rem, 30vw, 28rem); font-weight: 800; color: rgba(255,255,255,0.015); line-height: 1; pointer-events: none; z-index: 0; white-space: nowrap; }
 .project-slide__inner { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 @media (max-width: 860px) { .project-slide__inner { grid-template-columns: 1fr; gap: 2.5rem; } }
 .project-slide__left { display: flex; flex-direction: column; gap: .8rem; }

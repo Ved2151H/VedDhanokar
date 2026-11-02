@@ -298,7 +298,7 @@ export default function App() {
                 <article className="gh-card" key={r.id}>
                   <h3>{r.name}</h3>
                   <p>{r.description || 'No description provided.'}</p>
-                  <div className="gh-card__meta"><span>{r.language || '—'}</span><span>★ {r.stargazers_count || 0}</span><span>{new Date(r.updated_at).toLocaleDateString()}</span></div>
+                  <div className="gh-card__meta"><span>{r.language || '—'}</span><span>{r.stargazers_count || 0} stars</span><span>{new Date(r.updated_at).toLocaleDateString()}</span></div>
                   <a className="project-card__link" href={r.html_url} target="_blank" rel="noopener">Open</a>
                 </article>
               ))}
@@ -361,7 +361,7 @@ export default function App() {
             <div className="ach-grid">
               <div className="ach-item reveal"><h3>Finalist, Zentrix'26 National-Level Smart City AI Hackathon</h3><p>National finalist for an automated real-time urban computer vision and AI traffic surveillance solution.</p></div>
               <div className="ach-item reveal"><h3>Finalist, Zero UI Challenge</h3><p>Cummins College of Engineering. Touch-free emergency detection via mobile sensor fusion.</p></div>
-              <div className="ach-item reveal"><h3>3rd Rank, IEEE C'Quest Programming Competition</h3><p>Competitive programming and algorithmic problem solving under time constraints.</p></div>
+              <div className="ach-item reveal"><h3>3rd Rank, IEEE C’Quest Programming Competition</h3><p>Competitive programming and algorithmic problem solving under time constraints.</p></div>
               <div className="ach-item reveal"><h3>Google Solution Challenge Participant</h3><p>GDSC. Prototype addressing UN Sustainable Development Goals.</p></div>
             </div>
           </div>
