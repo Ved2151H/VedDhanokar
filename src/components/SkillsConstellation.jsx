@@ -47,7 +47,7 @@ export default function SkillsConstellation() {
           <span>VED</span>
         </div>
         {/* group nodes */}
-        {GROUPS.map(g => {
+        {GROUPS.map((g, i) => {
           const rad = (g.angle * Math.PI) / 180;
           const x = cx + radius * Math.cos(rad);
           const y = cy + radius * Math.sin(rad);
@@ -58,7 +58,7 @@ export default function SkillsConstellation() {
             <motion.div
               key={g.id}
               className={`skills-node ${isActive ? 'skills-node--active' : ''}`}
-              style={{ left: x, top: y, zIndex: isActive ? 10 : 1 }}
+              style={{ left: x, top: y, zIndex: isActive ? 10 : 1, animation: isActive ? 'none' : `skillsFloat 3s ease-in-out ${i * 0.3}s infinite` }}
               onMouseEnter={() => setActive(g.id)}
               onMouseLeave={() => setActive(null)}
               onClick={() => setActive(active === g.id ? null : g.id)}
