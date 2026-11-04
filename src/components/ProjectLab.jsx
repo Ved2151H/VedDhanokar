@@ -64,7 +64,7 @@ function ProjectRow({ p, index }) {
 
 export default function ProjectLab() {
   return (
-    <section id="project-lab" className="section project-lab">
+    <section id="work" className="section project-lab">
       <div className="container">
         <div className="project-lab__head">
           <span className="project-lab__label">Selected Work</span>
