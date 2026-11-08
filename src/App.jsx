@@ -56,6 +56,14 @@ export default function App() {
     return () => clearTimeout(t);
   }, [introHidden, reduceMotion]);
 
+  // Mobile menu: close on Escape
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e) => { if (e.key === 'Escape') setMenuOpen(false); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [menuOpen]);
+
   // Cursor
   useEffect(() => {
     if (reduceMotion || !window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
@@ -87,7 +95,7 @@ export default function App() {
       else setNavHidden(false);
       lastY.current = y;
       const photo = document.querySelector('.hero__photo');
-      if (photo) { photo.style.transform = `translateY(${window.scrollY * 0.12}px)`; }
+      if (photo && !reduceMotion) { photo.style.transform = `translateY(${window.scrollY * 0.12}px)`; }
       const tl = document.getElementById('timeline');
       if (tl) {
         const rect = tl.getBoundingClientRect();
@@ -205,6 +213,7 @@ export default function App() {
       <div id="cursor" className="cursor" aria-hidden="true"></div>
       <div id="cursor-dot" className="cursor-dot" aria-hidden="true"></div>
       <div id="cursor-label" className="cursor-label" aria-hidden="true"></div>
+      <a className="skip-link" href="#main">Skip to content</a>
 
       {/* Nav */}
       <motion.header className={`nav ${scrolled ? 'is-scrolled' : ''}`} id="nav" animate={{ y: navHidden ? -100 : 0 }} transition={{ duration: 0.3, ease: 'easeInOut' }}>
@@ -218,13 +227,13 @@ export default function App() {
               <li><a href="#contact" data-cursor="View">Contact</a></li>
             </ul>
           </nav>
-          <button className="nav__menu" onClick={() => setMenuOpen(o=>!o)} aria-label="Open menu" aria-expanded={menuOpen}>
+          <button className="nav__menu" onClick={() => setMenuOpen(o=>!o)} aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen}>
             <span></span><span></span>
           </button>
         </div>
       </motion.header>
 
-      <div className={`mobile-menu ${menuOpen ? 'is-open' : ''}`} aria-hidden={!menuOpen}>
+      <div className={`mobile-menu ${menuOpen ? 'is-open' : ''}`} role="dialog" aria-modal="true" aria-hidden={!menuOpen}>
         <nav aria-label="Mobile">
           <ul>
             <li><a href="#hero" onClick={() => setMenuOpen(false)}>Home</a></li>
