@@ -5,6 +5,9 @@ import ProjectLab from './components/ProjectLab.jsx';
 import SkillsConstellation from './components/SkillsConstellation.jsx';
 import Terminal from './components/Terminal.jsx';
 
+const PHONE_DISPLAY = '+91 9356761880';
+const PHONE_TEL = '+919356761880';
+
 const SKILLS = [
   { title: 'Programming', desc: 'Java, Python, JavaScript, SQL', tags: ['Java','Python','JavaScript','SQL'] },
   { title: 'Frontend & backend', desc: 'React, Node, Express, REST', tags: ['React.js','HTML','CSS','Node.js','Express.js','REST APIs','React Router','Axios','Mongoose'] },
@@ -41,6 +44,7 @@ export default function App() {
   const [searchLoading, setSearchLoading] = useState(false);
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState('');
+  const [phoneCopied, setPhoneCopied] = useState(false);
   const [timelinePct, setTimelinePct] = useState(0);
   const [timeStr, setTimeStr] = useState('');
   const [backVisible, setBackVisible] = useState(false);
@@ -165,6 +169,41 @@ export default function App() {
     card.style.transform = `perspective(1000px) rotateY(${x*6}deg) rotateX(${-y*6}deg) translateY(-6px)`;
   }, [reduceMotion]);
   const projectLeave = useCallback((e) => { e.currentTarget.style.transform = ''; }, []);
+
+  const copyTimer = useRef(null);
+  const copyPhone = useCallback(async () => {
+    const text = PHONE_DISPLAY;
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+      }
+      setPhoneCopied(true);
+      clearTimeout(copyTimer.current);
+      copyTimer.current = setTimeout(() => setPhoneCopied(false), 2000);
+    } catch {
+      setPhoneCopied(false);
+    }
+  }, []);
+  useEffect(() => () => clearTimeout(copyTimer.current), []);
+
+  // Phone link: tap/click opens the dialer, press-and-hold copies the number.
+  const holdStart = useRef(0);
+  const suppressClickUntil = useRef(0);
+  const startPhoneHold = useCallback(() => {
+    holdStart.current = Date.now();
+  }, []);
+  const endPhoneHold = useCallback(() => {
+    if (holdStart.current && Date.now() - holdStart.current >= 550) {
+      suppressClickUntil.current = Date.now() + 900;
+      copyPhone();
+    }
+    holdStart.current = 0;
+  }, [copyPhone]);
+  const cancelPhoneHold = useCallback(() => { holdStart.current = 0; }, []);
 
   const submit = (e) => {
     e.preventDefault();
@@ -422,6 +461,27 @@ export default function App() {
             <div className="contact__grid">
               <div className="contact__info reveal">
                 <a className="contact__row" href="mailto:dhanokarved@gmail.com"><span>Email</span><span>dhanokarved@gmail.com</span></a>
+                <div className="contact__row contact__row--phone">
+                  <span>Phone</span>
+                  <span className="contact__phone-actions">
+                    <a
+                      className="contact__phone-link"
+                      href={`tel:${PHONE_TEL}`}
+                      aria-label={`Call ${PHONE_DISPLAY}. Press and hold to copy the number.`}
+                      onPointerDown={startPhoneHold}
+                      onPointerUp={endPhoneHold}
+                      onPointerLeave={cancelPhoneHold}
+                      onPointerCancel={cancelPhoneHold}
+                      onClick={(e) => { if (Date.now() < suppressClickUntil.current) { e.preventDefault(); suppressClickUntil.current = 0; } }}
+                      onContextMenu={(e) => e.preventDefault()}
+                    >
+                      {PHONE_DISPLAY}
+                    </a>
+                    {phoneCopied ? (
+                      <span className="contact__phone-status" role="status" aria-live="polite">Copied</span>
+                    ) : null}
+                  </span>
+                </div>
                 <a className="contact__row" href="https://github.com/Ved2151H" target="_blank" rel="noopener"><span>GitHub</span><span>Ved2151H</span></a>
                 <a className="contact__row" href="https://www.linkedin.com/in/ved-dhanokar-b0351029b/" target="_blank" rel="noopener"><span>LinkedIn</span><span>Ved Dhanokar</span></a>
                 <a className="contact__row" href="https://leetcode.com/u/Ved_Dhanokar/" target="_blank" rel="noopener"><span>LeetCode</span><span>Ved_Dhanokar</span></a>
@@ -446,6 +506,7 @@ export default function App() {
           <div className="footer__links">
             <a href="https://github.com/Ved2151H" target="_blank" rel="noopener">GitHub</a>
             <a href="https://www.linkedin.com/in/ved-dhanokar-b0351029b/" target="_blank" rel="noopener">LinkedIn</a>
+            <a href={`tel:${PHONE_TEL}`}>Phone</a>
             <a href="mailto:dhanokarved@gmail.com">Email</a>
           </div>
           <div className="footer__meta">© 2026 Ved Dhanokar. Built by Ved.</div>
